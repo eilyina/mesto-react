@@ -7,9 +7,6 @@ import ImagePopup from "./ImagePopup";
 import Main from './Main.js';
 import PopupWithForm from "./PopupWithForm";
 
-
-
-
 function App() {
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -43,23 +40,19 @@ function App() {
     setSelectedCard(null);
   }
 
-
   return (
     <div className="App">
-      <html lang="ru">
+      <div lang="ru">
 
-        <head>
+        <div>
           <meta charSet="UTF-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
           <title>Mesto</title>
-        </head>
+        </div>
 
-        <body className="page">
+        <div className="page">
           <Header />
-
-
           <Main
             onEditProfile={handleEditProfileClick}
             onAddPlace={handleAddPlaceClick}
@@ -100,9 +93,6 @@ function App() {
             </>
           </PopupWithForm>
 
-
-
-
           <ImagePopup card={selectedCard} onClose={closeAllPopups}></ImagePopup>
 
           <PopupWithForm title="Вы уверены?" name="confirm" onClose={closeAllPopups}>
@@ -122,28 +112,8 @@ function App() {
 
           </PopupWithForm>
 
-          {/* <template id="card">
-            <div className="photo-grid__item">
-              <img className="photo-grid__image" />
-              <button className="photo-grid__trash" type="button" hidden></button>
-              <div className="photo-grid__title-container">
-                <h2 className="photo-grid__title"></h2>
-                <div className="photo-grid__like-container">
-                  <button className="photo-grid__like" type="button"></button>
-                  <p className="photo-grid__like-counter">5</p>
-                </div>
-
-              </div>
-
-            </div>
-          </template> */}
-
-
-
-        </body>
-
-      </html>
-
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,18 +1,16 @@
-function ImagePopup({card, onClose}) {
+function ImagePopup({ card, onClose }) {
 
-console.log(card)
+  return (
 
-    return (
-  
-        <div className={`popup popup_type_photo ${ card ?'popup_opened' : ''}`}>
-        <div className="popup__image-container">
-          <img className="popup__image" alt=" " src={ card ?`${card.link}`: ''}/>
-          <h4 className="popup__photo-title"></h4>
-          <button className="popup__cross popup__cross_type_image" type="button" onClick={onClose}></button>
-        </div>
+    <div className={`popup popup_type_photo ${card ? 'popup_opened' : ''}`}>
+      <div className="popup__image-container">
+        <img className="popup__image" alt={card ? card.name : ''} src={card ? `${card.link}` : ''} />
+        <h4 className="popup__photo-title">{card ? `${card.name}` : ''}</h4>
+        <button className="popup__cross popup__cross_type_image" type="button" onClick={onClose}></button>
       </div>
-  
-    );
-  }
-  
-  export default ImagePopup;
+    </div>
+
+  );
+}
+
+export default ImagePopup;
