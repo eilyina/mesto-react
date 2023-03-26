@@ -1,33 +1,26 @@
 import { api } from '../utils/Api.js';
 import Card from './Card.js';
-import React from "react";
+import { useEffect, useState } from 'react';
 
 function Main(props) {
-  const [userName, setUserName] = React.useState('');
-  const [userDescription, setUserDescription] = React.useState('');
-  const [userAvatar, setUserAvatar] = React.useState('');
-  const [cards, setCards] = React.useState([]);
+  const [userName, setUserName] = useState('');
+  const [userDescription, setUserDescription] = useState('');
+  const [userAvatar, setUserAvatar] = useState('');
+  const [cards, setCards] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     Promise.all([api.getUserInfo()
       , api.getInitialCards()
     ])
-      .then((data) => {
-        setUserName(data[0].name);
-        setUserDescription(data[0].about);
-        setUserAvatar(data[0].avatar);
-        setCards(data[1].map(item => {
-          return {
-            id: item._id,
-            name: item.name,
-            link: item.link,
-            likes: item.likes.length
-          }
-        }))
+      .then(([userData, cardData]) => {
+        setUserName(userData.name);
+        setUserDescription(userData.about);
+        setUserAvatar(userData.avatar);
+        setCards(cardData);
       })
       .catch((err) => console.log(`${err}`))
-  },[])
-
+  }, [])
+  //console.log(cards)
   return (
 
     <main className="content">
@@ -49,8 +42,9 @@ function Main(props) {
         </button>
       </section>
       <section className="photo-grid">
-        {cards.map(({ id, ...propsCard }) =>
-          <Card onCardClick={props.onCardClick} key={id}{...propsCard} ></Card>)}
+        {cards.map((card) =>
+          <Card key={card._id} name={card.name} link={card.link} likes={card.likes.length} onCardClick={props.onCardClick}></Card>)
+        }
       </section>
     </main>
   );

@@ -41,80 +41,63 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <div lang="ru">
+    <>
+        <Header />
+        <Main
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
+        ></Main>
 
-        <div>
-          <meta charSet="UTF-8" />
-          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>Mesto</title>
-        </div>
+        <Footer />
+        <PopupWithForm title="Редактировать профиль" name="edit" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} buttonText='Сохранить'>
+          < >           <label className="popup__input-label">
+            <input type="text" className="popup__input popup__input_type_name" name="name" placeholder="Имя" minLength="2"
+              maxLength="40" id="person-name" required />
+            <span className="person-name-error popup__input-error"></span>
+          </label>
 
-        <div className="page">
-          <Header />
-          <Main
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onEditAvatar={handleEditAvatarClick}
-            onCardClick={handleCardClick}
-          ></Main>
-
-          <Footer />
-          <PopupWithForm title="Редактировать профиль" name="edit" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
-            < >           <label className="popup__input-label">
-              <input type="text" className="popup__input popup__input_type_name" name="name" placeholder="Имя" minLength="2"
-                maxLength="40" id="person-name" required />
-              <span className="person-name-error popup__input-error"></span>
+            <label className="popup__input-label">
+              <input type="text" className="popup__input popup__input_type_professions" name="about" placeholder="О себе"
+                minLength="2" maxLength="200" id="person-profession" required />
+              <span className="person-profession-error popup__input-error"></span>
             </label>
+          </>
+        </PopupWithForm>
 
-              <label className="popup__input-label">
-                <input type="text" className="popup__input popup__input_type_professions" name="about" placeholder="О себе"
-                  minLength="2" maxLength="200" id="person-profession" required />
-                <span className="person-profession-error popup__input-error"></span>
-              </label>
-              <button type="submit" className="popup__submit">Сохранить</button></>
-          </PopupWithForm>
+        <PopupWithForm title="Новое место" name="create" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} buttonText='Создать'>
+          <>
+            <label className="popup__input-label">
+              <input type="text" className="popup__input popup__input_type_place-name" name="name" placeholder="Название"
+                minLength="2" maxLength="30" required id="title-mesto" />
+              <span className="title-mesto-error popup__input-error"></span>
+            </label>
+            <label className="popup__input-label">
+              <input type="url" className="popup__input popup__input_type_place-link" name="link"
+                placeholder="Ссылка на картинку" minLength="2" maxLength="200" required id="url-mesto" />
+              <span className="url-mesto-error popup__input-error"></span>
+            </label>
+          </>
+        </PopupWithForm>
 
-          <PopupWithForm title="Новое место" name="create" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
-            <>
-              <label className="popup__input-label">
-                <input type="text" className="popup__input popup__input_type_place-name" name="name" placeholder="Название"
-                  minLength="2" maxLength="30" required id="title-mesto" />
-                <span className="title-mesto-error popup__input-error"></span>
-              </label>
-              <label className="popup__input-label">
-                <input type="url" className="popup__input popup__input_type_place-link" name="link"
-                  placeholder="Ссылка на картинку" minLength="2" maxLength="200" required id="url-mesto" />
-                <span className="url-mesto-error popup__input-error"></span>
-              </label>
+        <ImagePopup card={selectedCard} onClose={closeAllPopups}></ImagePopup>
 
-              <button type="submit" className="popup__submit">Создать</button>
-            </>
-          </PopupWithForm>
+        <PopupWithForm title="Вы уверены?" name="confirm" onClose={closeAllPopups} buttonText='Да'>
+          <></>
+        </PopupWithForm>
 
-          <ImagePopup card={selectedCard} onClose={closeAllPopups}></ImagePopup>
+        <PopupWithForm title="Обновить аватар" name="update-avatar" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} buttonText='Сохранить'>
+          <>
+            <label className="popup__input-label">
+              <input type="url" className="popup__input popup__input_type_place-link" name="avatar"
+                placeholder="Ссылка на картинку" minLength="2" maxLength="200" required id="url-avatar" />
+              <span className="url-avatar-error popup__input-error"></span>
+            </label>
+          </>
 
-          <PopupWithForm title="Вы уверены?" name="confirm" onClose={closeAllPopups}>
-            <><button type="submit" className="popup__submit">Да</button></>
-          </PopupWithForm>
-
-          <PopupWithForm title="Обновить аватар" name="update-avatar" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
-            <>
-              <label className="popup__input-label">
-                <input type="url" className="popup__input popup__input_type_place-link" name="avatar"
-                  placeholder="Ссылка на картинку" minLength="2" maxLength="200" required id="url-avatar" />
-                <span className="url-avatar-error popup__input-error"></span>
-              </label>
-
-              <button type="submit" className="popup__submit">Создать</button>
-            </>
-
-          </PopupWithForm>
-
-        </div>
-      </div>
-    </div>
+        </PopupWithForm>
+    </>
   );
 }
 
