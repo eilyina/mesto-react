@@ -95,9 +95,9 @@ export default class Api {
       });
   }
 
-  deleteLike(idCard) {
+  changeLikeCardStatus(idCard, isLike) {
     return fetch(`${this.url}/cards/${idCard}/likes`, {
-      method: 'DELETE',
+      method: isLike ? 'DELETE' : 'PUT',
       headers: this.headers
     })
       .then(res => this._handleResponse(res))
@@ -105,23 +105,8 @@ export default class Api {
         console.log(err);
         throw err;
       });
+
   }
-
-  putLike(idCard) {
-    return fetch(`${this.url}/cards/${idCard}/likes`, {
-      method: 'PUT',
-      headers: this.headers
-    })
-      .then(res => this._handleResponse(res))
-      .catch(err => {
-        console.log(err);
-        throw err;
-      });
-  }
-
-
-
-    
 }
 
 export const api = new Api(
