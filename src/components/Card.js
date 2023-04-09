@@ -3,18 +3,11 @@ import React from "react";
 
 function Card(card) {
 
-
   const user = React.useContext(CurrentUserContext);
- // console.log(card.owner)
-
   const isOwn = card.owner._id === user._id;
-
   const isLiked = card.likes.some(i => i._id === user._id);
-
-  const cardLikeButtonClassName = 
-    `photo-grid__like ${isLiked && 'photo-grid__like_active'}` 
-;
-
+  const cardLikeButtonClassName =
+    `photo-grid__like ${isLiked && 'photo-grid__like_active'}`;
 
   function handleCard() {
     card.onCardClick(card);
@@ -28,12 +21,10 @@ function Card(card) {
     card.onCardDelete(card);
   }
 
-
-
   return (
     <div className="photo-grid__item">
-      <img className="photo-grid__image" alt={card.name} onClick={handleCard}  src={card.link} />
-      {isOwn &&<button className="photo-grid__trash" type="button" onClick={handleCardDelete}></button>}
+      <img className="photo-grid__image" alt={card.name} onClick={handleCard} src={card.link} />
+      {isOwn && <button className="photo-grid__trash" type="button" onClick={handleCardDelete}></button>}
       <div className="photo-grid__title-container">
         <h2 className="photo-grid__title">{card.name}</h2>
         <div className="photo-grid__like-container">

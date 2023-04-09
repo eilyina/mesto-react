@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import '../index.css';
 import Footer from './Footer.js';
 import Header from './Header.js';
 import ImagePopup from "./ImagePopup";
 import Main from './Main.js';
 import PopupWithForm from "./PopupWithForm";
-import { useEffect, useState } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { api } from '../utils/Api.js';
 import EditProfilePopup from "./EditProfilePopup";
@@ -82,7 +81,9 @@ function App() {
         setCurrentUser(userData);
 
       })
+      .catch(() => console.log('Произошла ошибка'))
   }
+
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
@@ -126,22 +127,18 @@ function App() {
         ></Main>
 
         <Footer />
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}>
-        </EditProfilePopup>
 
-        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}>
-        </AddPlacePopup>
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}></EditProfilePopup>
+
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}></AddPlacePopup>
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups}></ImagePopup>
 
-        <PopupWithForm title="Вы уверены?" name="confirm" onClose={closeAllPopups} buttonText='Да'>
-          <></>
-        </PopupWithForm>
+        <PopupWithForm title="Вы уверены?" name="confirm" onClose={closeAllPopups} buttonText='Да'></PopupWithForm>
 
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}>
         </EditAvatarPopup>
       </>
-
 
     </CurrentUserContext.Provider>
 

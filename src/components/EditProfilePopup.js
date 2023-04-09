@@ -1,7 +1,6 @@
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import React from "react";
+import React, { useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
-import { useEffect } from 'react';
 
 function EditProfilePopup(props) {
 
@@ -17,14 +16,7 @@ function EditProfilePopup(props) {
     setName(currentUser.name ?? '');
     setDescription(currentUser.about ?? '');
 
-  }, [currentUser]);
-
-  const onClear = () => {
-    props.onClose();
-    setName(currentUser.name);
-    setDescription(currentUser.about);
-
-  };
+  }, [currentUser, props.isOpen]);
 
   function handleNameChange(e) {
     setName(e.target.value);
@@ -47,12 +39,13 @@ function EditProfilePopup(props) {
   }
 
   return (
-    <PopupWithForm title="Редактировать профиль" name="edit" onSubmit={handleSubmit} isOpen={props.isOpen} onClose={onClear} onClear={onClear} buttonText='Сохранить'>
-      < >           <label className="popup__input-label">
-        <input type="text" className="popup__input popup__input_type_name" name="name" placeholder="Имя" minLength="2"
-          maxLength="40" id="person-name" required value={name} onChange={handleNameChange} />
-        <span className="person-name-error popup__input-error"></span>
-      </label>
+    <PopupWithForm title="Редактировать профиль" name="edit" onSubmit={handleSubmit} isOpen={props.isOpen} onClose={props.onClose} buttonText='Сохранить'>
+      < >
+        <label className="popup__input-label">
+          <input type="text" className="popup__input popup__input_type_name" name="name" placeholder="Имя" minLength="2"
+            maxLength="40" id="person-name" required value={name} onChange={handleNameChange} />
+          <span className="person-name-error popup__input-error"></span>
+        </label>
 
         <label className="popup__input-label">
           <input type="text" className="popup__input popup__input_type_professions" name="about" placeholder="О себе"

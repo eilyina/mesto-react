@@ -1,14 +1,10 @@
-
-import React from "react";
+import React, { useContext } from "react";
 import Card from './Card.js';
-import { useContext } from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-
 
 function Main(props) {
 
   const user = useContext(CurrentUserContext);
-
   return (
 
     <main className="content">
@@ -30,8 +26,6 @@ function Main(props) {
         </button>
       </section>
       <section className="photo-grid">
-
-
         {props.cards.map((card) =>
         (
           <Card key={card._id}
@@ -46,11 +40,9 @@ function Main(props) {
           ></Card>
         ))
         }
-
       </section>
     </main>
   );
-
 }
 
 export default Main;

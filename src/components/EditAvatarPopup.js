@@ -8,8 +8,8 @@ function EditAvatarPopup(props) {
     const onClear = () => {
         props.onClose();
         linkRef.current.value = '';
-    
-      };
+
+    };
 
     function handleSubmit(e) {
         e.preventDefault();
